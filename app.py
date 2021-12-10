@@ -24,6 +24,29 @@ def home():
     return render_template('personajes/index.html')
    # return render_template('python-personajes-disney/index.html')
 
+@app.route('/create')
+def create():
+    return render_template('personajes/create.html')
+
+@app.route('/store', methods=['POST'])
+def storage():
+    _name=request.form['txtName']
+    _history=request.form['txtHistory']
+    _photo=request.form['txtPhoto']
+    
+    sql="INSERT INTO `personajes` (`id`, `imagen`, `nombre`, `edad`, `peso`, `historia`, `asociaciones`, `createdAt`, `updatedAt`) VALUES (NULL, %s, %s, '1', '1', %s, 'OTROS', '2021-12-09 00:00:00', '2021-12-09 00:00:00');"
+    
+    date=(_photo, _name, _history)
+    
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute(sql,date)
+    conn.commit()
+    #if request.method=='POST':
+    # Handle POST Request here
+    return render_template('personajes/index.html')
+   # return render_template('python-personajes-disney/index.html')
+
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
     app.run(port=5000,debug=True)
