@@ -40,6 +40,38 @@ def destroy(id):
     conn.commit()
     return redirect('/')
 
+@app.route('/update', methods=['POST'])
+def update():
+
+    _name=request.form['txtName']
+    _history=request.form['txtHistory']
+    _photo=request.form['txtPhoto']
+    id=request.form['txtID']
+
+    sql="UPDATE `personajes` SET `imagen`=%s, `nombre`=%s, `historia`=%s WHERE id=%s;"
+    
+    data=(_photo, _name, _history, id)
+    
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute(sql,data)
+    conn.commit()
+
+    return redirect('/')
+
+@app.route('/edit/<int:id>')
+def edit(id):
+    conn= mysql.connect()
+    cursor=conn.cursor()
+
+    cursor.execute("SELECT * FROM personajes WHERE id=%s", (id))
+    
+    personajes=cursor.fetchall()
+    
+    conn.commit()
+    print(personajes)
+    return render_template('personajes/edit.html', personajes=personajes)
+
 
 @app.route('/store', methods=['POST'])
 def storage():
@@ -49,11 +81,11 @@ def storage():
     
     sql="INSERT INTO `personajes` (`id`, `imagen`, `nombre`, `edad`, `peso`, `historia`, `asociaciones`, `createdAt`, `updatedAt`) VALUES (NULL, %s, %s, '1', '1', %s, 'OTROS', '2021-12-09 00:00:00', '2021-12-09 00:00:00');"
     
-    date=(_photo, _name, _history)
+    data=(_photo, _name, _history)
     
     conn= mysql.connect()
     cursor=conn.cursor()
-    cursor.execute(sql,date)
+    cursor.execute(sql,data)
     conn.commit()
     #if request.method=='POST':
     # Handle POST Request here

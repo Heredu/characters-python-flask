@@ -1,0 +1,16 @@
+{% for personaje in personajes %}
+
+<form method="post" action="/update" enctype="multipart/form-data">
+
+    <input type="text" value="{{ personaje[0] }}" name="txtID" id="txtID"> <br>
+    Name:<br>
+    <input type="text" value="{{ personaje[2] }}" name="txtName" id="txtName"> <br>
+    History:<br>
+    <input type="text" value="{{ personaje[5] }}" name="txtHistory" id="txtHistory" size=150> <br>
+    Photo:<br>
+    <input type="text" value="{{ personaje[1] }}" name="txtPhoto" id="txtPhoto"size=150> <br><br>
+    <input type="submit" value="add">
+
+</form>
+
+{% endfor %}
