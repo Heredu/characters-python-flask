@@ -20,7 +20,7 @@ def home():
     cursor.execute(sql)
     
     personajes=cursor.fetchall()
-    print(personajes)
+    #print(personajes)
 
     conn.commit()
     #if request.method=='POST':

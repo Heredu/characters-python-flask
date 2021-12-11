@@ -1,16 +1,42 @@
+{% include 'header.html' %}
 {% for personaje in personajes %}
-
+<br>
 <form method="post" action="/update" enctype="multipart/form-data">
 
-    <input type="text" value="{{ personaje[0] }}" name="txtID" id="txtID"> <br>
-    Name:<br>
-    <input type="text" value="{{ personaje[2] }}" name="txtName" id="txtName"> <br>
-    History:<br>
-    <input type="text" value="{{ personaje[5] }}" name="txtHistory" id="txtHistory" size=150> <br>
-    Photo:<br>
-    <input type="text" value="{{ personaje[1] }}" name="txtPhoto" id="txtPhoto"size=150> <br><br>
-    <input type="submit" value="add">
+    <div class="card">
+        <div class="card-header">
+            Edit
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Character data</h5>
+            <p class="card-text">
+                <input type="hidden"  value="{{ personaje[0] }}" name="txtID" id="txtID">
+                <div class="form-group">
+                    <label for="txtName">Name:</label>
+                    <input id="txtName" value="{{ personaje[2] }}" class="form-control" type="text" name="txtName">
+                </div>
+                <div class="form-group">
+                    <label for="txtHistory">History:</label>
+                    <input id="txtHistory" value="{{ personaje[5] }}" class="form-control" type="text" name="txtHistory">
+                </div>
+                <div class="form-group">
+                    <label for="txtPhotot">Photo:</label>
+                    <img class="img-thumbnail" width="50" src={{ personaje[1] }}>
+                    <input id="txtPhoto" value="{{ personaje[1] }}" class="form-control" type="text" name="txtPhoto">
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-success" value="Edit">
+                    <a href="index.html" class="btn btn-danger">Cancel</a>
+                </div>
+ 
+            </p>
+        </div>
+    </div>
+
+
 
 </form>
 
 {% endfor %}
+{% include 'footer.html' %}
