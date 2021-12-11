@@ -14,14 +14,18 @@ mysql.init_app(app)
 @app.route('/',)
 def home():
 
-    sql="INSERT INTO `personajes` (`id`, `imagen`, `nombre`, `edad`, `peso`, `historia`, `asociaciones`, `createdAt`, `updatedAt`) VALUES (NULL, 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/531st_Bombardment_Squadron_Emblem.png/245px-531st_Bombardment_Squadron_Emblem.png', 'Pato Donald', '87', '50', 'Donald suele intentar ver las cosas con positivismo y alegría', 'OTROS', '2021-12-09 00:00:00', '2021-12-09 00:00:00');"
+    sql="SELECT * FROM `personajes`;"
     conn= mysql.connect()
     cursor=conn.cursor()
     cursor.execute(sql)
+    
+    personajes=cursor.fetchall()
+    print(personajes)
+
     conn.commit()
     #if request.method=='POST':
     # Handle POST Request here
-    return render_template('personajes/index.html')
+    return render_template('personajes/index.html', personajes=personajes)
    # return render_template('python-personajes-disney/index.html')
 
 @app.route('/create')
