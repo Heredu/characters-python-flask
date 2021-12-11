@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request
+from flask import Flask,redirect,url_for,render_template,request,redirect
 from flaskext.mysql import MySQL
 
 app=Flask(__name__)
@@ -31,6 +31,15 @@ def home():
 @app.route('/create')
 def create():
     return render_template('personajes/create.html')
+
+@app.route('/destroy/<int:id>')
+def destroy(id):
+    conn= mysql.connect()
+    cursor=conn.cursor()
+    cursor.execute("DELETE FROM personajes WHERE id=%s", (id))
+    conn.commit()
+    return redirect('/')
+
 
 @app.route('/store', methods=['POST'])
 def storage():

@@ -28,7 +28,9 @@
             <td>{{ personaje[1] }}</td>
             <td>{{ personaje[2] }}</td>
             <td>{{ personaje[5] }}</td>
-            <td>edit | delete</td>
+            <td>edit | 
+              <a href="/destroy/{{personaje[0]}}">Delete</a>
+            </td>
           </tr>  
           {% endfor %}
         </tbody>   
