@@ -31,7 +31,7 @@ def home():
 @app.route('/create')
 def create():
     return render_template('personajes/create.html')
-
+    
 @app.route('/destroy/<int:id>')
 def destroy(id):
     conn= mysql.connect()
